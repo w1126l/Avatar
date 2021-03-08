@@ -1,4 +1,6 @@
 
+let sketchStarted = false;
+
 let mic;
 let micLevel;
 
@@ -20,25 +22,30 @@ function setup() {
   drawBackgroundStars(); //background stars
 
   createButton("Start Froag").mousePressed(startSketch);
-  mic = new p5.AudioIn();
-  mic.start();
 
 }
 
 function startSketch() {
 
-  console.log('start sketch');
+  mic = new p5.AudioIn();
+  mic.start();
+
+  sketchStarted = true;
 
 }
 
 function draw() {
 
+  if(sketchStarted) {
+
   micLevel = mic.getLevel() * 10;
 
-  console.log('Mic level is: ' + micLevel);
-  console.log(frameCount);
+  //console.log('Mic level is: ' + micLevel);
+  //console.log(frameCount);
 
   drawFrog();
+
+}
 
 }
 
@@ -169,7 +176,7 @@ function drawMouth(x, y, w, h, startAngle, stopAngle, parameter) {
   fill(mouthColor);
   stroke(mouthOutlineColor);
   strokeWeight(8);
-  arc(x, y, w, h, startAngle, stopAngle, parameter, mouthColor, mouthOutlineColor);
+  arc(x, y, w, h, startAngle, stopAngle, parameter);
 
 }
 
